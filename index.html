@@ -3,266 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sports Hub - Canales en Vivo</title>
+    <title>DSports Plus En Vivo | TV Hub Gratis</title>
     <style>
         :root {
-            --bg-main: #0f172a;
-            --bg-card: #1e293b;
-            --accent: #2563eb;
-            --accent-hover: #3b82f6;
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-dark: #090d16;
+            --bg-card: #131a26;
+            --accent-blue: #0056ff;
+            --accent-hover: #3377ff;
+            --text-main: #f1f5f9;
+            --text-muted: #64748b;
+            --live-red: #ef4444;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-light);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
         }
 
         header {
             background-color: var(--bg-card);
-            padding: 20px;
-            text-align: center;
-            border-bottom: 3px solid var(--accent);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #1e293b;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        header h1 span {
-            color: var(--accent);
+        .logo span { color: var(--accent-blue); }
+
+        .badge-vivo {
+            background-color: var(--live-red);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            animation: parpadeo 1.5s infinite;
         }
 
-        header p {
-            margin: 5px 0 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        @keyframes parpadeo {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
         }
 
-        .search-container {
-            max-width: 500px;
-            margin: 30px auto 10px auto;
-            padding: 0 20px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 20px;
-            font-size: 1rem;
-            background-color: var(--bg-card);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            color: var(--text-light);
-            outline: none;
-            box-sizing: border-box;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .search-input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
-        }
-
-        main {
+        .container {
             max-width: 1200px;
-            margin: 20px auto 40px auto;
+            margin: 30px auto;
             padding: 0 20px;
-        }
-
-        .grid-canales {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: 2fr 1fr;
             gap: 25px;
         }
 
-        .card-canal {
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+        }
+
+        /* Reproductor y Controles */
+        .player-area {
             background-color: var(--bg-card);
             border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .video-box {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* Relación de aspecto 16:9 */
+            background-color: #000;
+        }
+
+        .video-box iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .controls-bar {
+            padding: 15px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 25px 15px;
-            text-align: center;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            gap: 10px;
+            background-color: #1a2332;
+            border-top: 1px solid #2e3b4e;
         }
 
-        .card-canal:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-            border-color: var(--accent);
-        }
-
-        .logo-placeholder {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
+        .btn-opcion {
+            background-color: #2e3b4e;
             color: white;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .card-canal h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.2rem;
-        }
-
-        .card-canal p {
-            margin: 0 0 20px 0;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .btn-ver {
-            display: inline-block;
-            background-color: var(--accent);
-            color: white;
-            text-decoration: none;
-            padding: 10px 24px;
+            border: none;
+            padding: 8px 16px;
             border-radius: 6px;
+            cursor: pointer;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: background-color 0.2s;
-            width: 80%;
-            box-sizing: border-box;
+            transition: background 0.2s;
         }
 
-        .btn-ver:hover {
-            background-color: var(--accent-hover);
+        .btn-opcion.active, .btn-opcion:hover {
+            background-color: var(--accent-blue);
         }
 
-        .no-results {
+        /* Información del Canal */
+        .info-box {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: var(--bg-card);
+            border-radius: 12px;
+        }
+
+        .info-box h1 { margin: 0 0 10px 0; font-size: 1.6rem; }
+        .info-box p { color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+        /* Chat Lateral Estático */
+        .chat-box {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            border: 1px solid #1e293b;
+        }
+
+        .chat-header {
+            padding: 15px;
+            background-color: #1a2332;
+            font-weight: bold;
+            border-bottom: 1px solid #2e3b4e;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 0.9rem;
+        }
+
+        .msg { background-color: #1a2332; padding: 8px 12px; border-radius: 8px; }
+        .msg .user { color: var(--accent-blue); font-weight: bold; margin-right: 5px; }
+
+        .chat-footer {
+            padding: 15px;
+            border-top: 1px solid #2e3b4e;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 8px 12px;
+            background-color: #090d16;
+            border: 1px solid #2e3b4e;
+            border-radius: 6px;
+            color: white;
+            outline: none;
+        }
+
+        .btn-send {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* Sección de otros canales */
+        .more-channels {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .grid-mini {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .mini-card {
+            background-color: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
-            grid-column: 1 / -1;
-            padding: 40px;
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            display: none;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border: 1px solid #1e293b;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .mini-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
         }
 
         footer {
             text-align: center;
-            padding: 30px 20px;
+            padding: 20px;
             color: var(--text-muted);
             font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 60px;
+            border-top: 1px solid #1e293b;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Fútbol <span>Hub TV</span></h1>
-    <p>Guía de canales y agenda deportiva estática</p>
+    <div class="logo">TV HUB <span>GRATIS 2</span></div>
+    <div class="badge-vivo">En Vivo</div>
 </header>
 
-<div class="search-container">
-    <input type="text" id="buscarCanal" class="search-input" placeholder="Buscar canal (ej. ESPN, Fox, Liga1)...">
-</div>
-
-<main>
-    <div class="grid-canales" id="listaCanales">
-        <!-- Canal 1 -->
-        <div class="card-canal">
-            <div class="logo-placeholder">L1M</div>
-            <h3>LIGA1 MAX</h3>
-            <p>Fútbol Peruano en vivo</p>
-            <a href="https://l1max.com" target="_blank" class="btn-ver">Ver Canal</a>
+<div class="container">
+    <!-- Bloque izquierdo: Reproductor e Info -->
+    <div>
+        <div class="player-area">
+            <div class="video-box">
+                <!-- Se utiliza un tráiler deportivo oficial de YouTube como marcador seguro para GitHub Pages -->
+                <iframe id="reproductor" src="https://youtube.com" allowfullscreen></iframe>
+            </div>
+            <div class="controls-bar">
+                <button class="btn-opcion active" onclick="cambiarOpcion('https://youtube.com', this)">Opción 1</button>
+                <button class="btn-opcion" onclick="cambiarOpcion('https://youtube.com?start=10', this)">Opción 2</button>
+                <button class="btn-opcion" onclick="cambiarOpcion('https://youtube.com?start=20', this)">Opción 3</button>
+            </div>
         </div>
 
-        <!-- Canal 2 -->
-        <div class="card-canal">
-            <div class="logo-placeholder">DS</div>
-            <h3>DSports</h3>
-            <p>Sudamericana y competencias internacionales</p>
-            <a href="https://directvgo.com" target="_blank" class="btn-ver">Ver Canal</a>
-        </div>
-
-        <!-- Canal 3 -->
-        <div class="card-canal">
-            <div class="logo-placeholder">E1</div>
-            <h3>ESPN 1</h3>
-            <p>Champions League y ligas de Europa</p>
-            <a href="https://disneyplus.com" target="_blank" class="btn-ver">Ver Canal</a>
-        </div>
-
-        <!-- Canal 4 -->
-        <div class="card-canal">
-            <div class="logo-placeholder">E2</div>
-            <h3>ESPN 2</h3>
-            <p>Torneos locales y ligas internacionales</p>
-            <a href="https://disneyplus.com" target="_blank" class="btn-ver">Ver Canal</a>
-        </div>
-
-        <!-- Canal 5 -->
-        <div class="card-canal">
-            <div class="logo-placeholder">FS1</div>
-            <h3>Fox Sports 1</h3>
-            <p>Copa Libertadores en directo</p>
-            <a href="https://disneyplus.com" target="_blank" class="btn-ver">Ver Canal</a>
-        </div>
-
-        <!-- Canal 6 -->
-        <div class="card-canal">
-            <div class="logo-placeholder">GPE</div>
-            <h3>GOLPERU</h3>
-            <p>Partidos históricos y transmisión local</p>
-            <a href="https://movistarplay.com.pe" target="_blank" class="btn-ver">Ver Canal</a>
-        </div>
-
-        <div class="no-results" id="mensajeVacio">
-            No se encontraron canales que coincidan con tu búsqueda.
+        <div class="info-box">
+            <h1>DIRECTV SPORTS PLUS EN VIVO</h1>
+            <p>Disfruta de la mejor cobertura del fútbol internacional, análisis especializados, eventos premium y la programación deportiva más completa en alta definición las 24 horas del día de manera estable.</p>
         </div>
     </div>
-</main>
+
+    <!-- Bloque derecho: Chat en vivo simulado -->
+    <div class="chat-box">
+        <div class="chat-header">Chat en Vivo</div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg"><span class="user">Carlos99:</span> ¡Por fin empezó el partido! ¡Vamos!</div>
+            <div class="msg"><span class="user">Futbolero_pe:</span> Se ve excelente la señal HD.</div>
+            <div class="msg"><span class="user">Andres_Gol:</span> ¿Alguien sabe cuánto van en el otro partido?</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Escribe un mensaje...">
+            <button class="btn-send" onclick="enviarMensaje()">Enviar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Sección de navegación hacia otros canales oficiales -->
+<div class="more-channels">
+    <h3>Ver más canales deportivos</h3>
+    <div class="grid-mini">
+        <a href="https://directvgo.com" target="_blank" class="mini-card">DSports Original</a>
+        <a href="https://l1max.com" target="_blank" class="mini-card">Liga1 Max</a>
+        <a href="https://disneyplus.com" target="_blank" class="mini-card">ESPN 1</a>
+        <a href="https://movistarplay.com.pe" target="_blank" class="mini-card">GolPerú</a>
+    </div>
+</div>
 
 <footer>
-    <p>© 2026 Sports Hub TV | Alojado de forma estática en GitHub Pages</p>
+    <p>© 2026 TV Hub Gratis 2 | Diseñado de forma estática para GitHub Pages</p>
 </footer>
 
 <script>
-    document.getElementById('buscarCanal').addEventListener('input', function(e) {
-        const terminoBusqueda = e.target.value.toLowerCase().trim();
-        const tarjetas = document.querySelectorAll('.card-canal');
-        const mensajeVacio = document.getElementById('mensajeVacio');
-        let contadorVisibles = 0;
+    // Lógica para alternar entre las opciones del reproductor
+    function cambiarOpcion(url, boton) {
+        document.getElementById('reproductor').src = url;
+        
+        // Actualiza el estado activo en los botones
+        document.querySelectorAll('.btn-opcion').forEach(btn => btn.classList.remove('active'));
+        boton.classList.add('active');
+    }
 
-        tarjetas.forEach(tarjeta => {
-            const nombreCanal = tarjeta.querySelector('h3').textContent.toLowerCase();
-            const descripcionCanal = tarjeta.querySelector('p').textContent.toLowerCase();
-
-            if (nombreCanal.includes(terminoBusqueda) || descripcionCanal.includes(terminoBusqueda)) {
-                tarjeta.style.display = 'flex';
-                contadorVisibles++;
-            } else {
-                tarjeta.style.display = 'none';
-            }
-        });
-
-        if (contadorVisibles === 0) {
-            mensajeVacio.style.display = 'block';
-        } else {
-            mensajeVacio.style.display = 'none';
-        }
-    });
-</script>
-
-</body>
-</html>
+    // Lógica interactiva para simular el envío de mensajes en el chat
+    function enviarMensaje() {
+        const input = document.getElementById('chatInput');
+        const mensajeTexto = input.value.trim();
+        
+        if (mensajeTexto !== "") {
+            const chatMessages = document.getElementById('chatMessages');
+            
+            const nuevoMensaje = document.createElement('div');
+            nuevoMensaje.className = 'msg';
+            nuevoMensaje.innerHTML = `<span class="user">Tú:</span> ${mensajeTexto}`;
+            
+            chatMessages.appendChild(nuevoMensaje);
+            input.value = "";
+            
