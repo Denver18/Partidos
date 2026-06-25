@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSports Plus En Vivo | TV Hub Gratis</title>
-    <!-- Estilos del reproductor Video.js -->
-    <link href="https://zencdn.net" rel="stylesheet" />
+    <title>Sports Hub En Vivo | TV Hub Gratis</title>
     <style>
         :root {
             --bg-dark: #090d16;
@@ -73,7 +71,6 @@
             .container { grid-template-columns: 1fr; }
         }
 
-        /* Área del Reproductor Profesional */
         .player-area {
             background-color: var(--bg-card);
             border-radius: 12px;
@@ -81,15 +78,20 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
 
-        .video-container {
+        .video-box {
+            position: relative;
             width: 100%;
+            padding-top: 56.25%;
             background-color: #000;
         }
 
-        .video-js {
-            width: 100% !important;
-            height: auto !important;
-            aspect-ratio: 16/9;
+        .video-box iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         .controls-bar {
@@ -126,13 +128,12 @@
         .info-box h1 { margin: 0 0 10px 0; font-size: 1.6rem; }
         .info-box p { color: var(--text-muted); line-height: 1.6; margin: 0; }
 
-        /* Chat Lateral */
         .chat-box {
             background-color: var(--bg-card);
             border-radius: 12px;
             display: flex;
             flex-direction: column;
-            height: 480px;
+            height: 450px;
             border: 1px solid #1e293b;
         }
 
@@ -183,45 +184,6 @@
             border-radius: 6px;
             cursor: pointer;
         }
-
-        .more-channels {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .grid-mini {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .mini-card {
-            background-color: var(--bg-card);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-            font-weight: 600;
-            border: 1px solid #1e293b;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .mini-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-blue);
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid #1e293b;
-            margin-top: 40px;
-        }
     </style>
 </head>
 <body>
@@ -234,22 +196,20 @@
 <div class="container">
     <div>
         <div class="player-area">
-            <div class="video-container">
-                <!-- Reproductor HLS Profesional -->
-                <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" data-setup='{}'>
-                    <source src="https://footprint.net" type="application/x-mpegURL">
-                </video>
+            <div class="video-box">
+                <!-- SEÑAL DE TU NUEVA CAPTURA (OPCIÓN REPRODUCTOR JW PLAYER) -->
+                <iframe id="reproductor" src="https://ksdjugfsddeports.com" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
             </div>
             <div class="controls-bar">
-                <button class="btn-opcion active" onclick="cambiarSeñal('https://footprint.net', this)">Opción 1</button>
-                <button class="btn-opcion" onclick="cambiarSeñal('https://footprint.net', this)">Opción 2</button>
-                <button class="btn-opcion" onclick="cambiarSeñal('https://503cdn.com', this)">Opción 3</button>
+                <button class="btn-opcion active" onclick="cambiarCanal('https://ksdjugfsddeports.com', this)">Opción 1 (JW)</button>
+                <button class="btn-opcion" onclick="cambiarCanal('https://ksdjugfsddeports.com', this)">Opción 2 (Clappr)</button>
+                <button class="btn-opcion" onclick="cambiarCanal('https://youtube.com', this)">Opción 3 (Prueba)</button>
             </div>
         </div>
 
         <div class="info-box">
-            <h1>DIRECTV SPORTS PLUS EN VIVO</h1>
-            <p>Disfruta de la mejor cobertura del fútbol internacional, análisis especializados, eventos premium y la programación deportiva más completa en alta definición las 24 horas del día de manera estable.</p>
+            <h1>DIRECTV SPORTS EN VIVO</h1>
+            <p>Disfruta de la mejor cobertura del fútbol internacional, análisis especializados, eventos premium y la programación deportiva más completa en alta definición las 24 horas del día.</p>
         </div>
     </div>
 
@@ -258,7 +218,7 @@
         <div class="chat-messages" id="chatMessages">
             <div class="msg"><span class="user">Carlos99:</span> ¡Por fin empezó el partido! ¡Vamos!</div>
             <div class="msg"><span class="user">Futbolero_pe:</span> Se ve excelente la señal HD.</div>
-            <div class="msg"><span class="user">Andres_Gol:</span> ¿Alguien sabe cuánto van en el otro partido?</div>
+            <div class="msg"><span class="user">Andres_Gol:</span> ¡Qué buen nivel de juego hoy!</div>
         </div>
         <div class="chat-footer">
             <input type="text" id="chatInput" class="chat-input" placeholder="Escribe un mensaje...">
@@ -267,33 +227,9 @@
     </div>
 </div>
 
-<div class="more-channels">
-    <h3>Ver más canales deportivos</h3>
-    <div class="grid-mini">
-        <a href="https://directvgo.com" target="_blank" class="mini-card">DSports Original</a>
-        <a href="https://l1max.com" target="_blank" class="mini-card">Liga1 Max</a>
-        <a href="https://disneyplus.com" target="_blank" class="mini-card">ESPN 1</a>
-        <a href="https://movistarplay.com.pe" target="_blank" class="mini-card">GolPerú</a>
-    </div>
-</div>
-
-<footer>
-    <p>© 2026 TV Hub Gratis 2 | Diseñado de forma estática para GitHub Pages</p>
-</footer>
-
-<!-- Scripts del reproductor Video.js -->
-<script src="https://zencdn.net"></script>
 <script>
-    var player = videojs('my-video');
-
-    // Cambiar de canal de transmisión de forma dinámica sin romper el reproductor
-    function cambiarSeñal(url, boton) {
-        player.src({
-            src: url,
-            type: 'application/x-mpegURL'
-        });
-        player.play();
-        
+    function cambiarCanal(url, boton) {
+        document.getElementById('reproductor').src = url;
         document.querySelectorAll('.btn-opcion').forEach(btn => btn.classList.remove('active'));
         boton.classList.add('active');
     }
@@ -307,4 +243,18 @@
             const nuevoMensaje = document.createElement('div');
             nuevoMensaje.className = 'msg';
             nuevoMensaje.innerHTML = `<span class="user">Tú:</span> ${mensajeTexto}`;
-            
+            chatMessages.appendChild(nuevoMensaje);
+            input.value = "";
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    }
+
+    document.getElementById('chatInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            enviarMensaje();
+        }
+    });
+</script>
+
+</body>
+</html>
