@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DSports Plus En Vivo | TV Hub Gratis</title>
+    <!-- Estilos del reproductor Video.js -->
+    <link href="https://zencdn.net" rel="stylesheet" />
     <style>
         :root {
             --bg-dark: #090d16;
@@ -71,7 +73,7 @@
             .container { grid-template-columns: 1fr; }
         }
 
-        /* Reproductor y Controles */
+        /* Área del Reproductor Profesional */
         .player-area {
             background-color: var(--bg-card);
             border-radius: 12px;
@@ -79,20 +81,15 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
 
-        .video-box {
-            position: relative;
+        .video-container {
             width: 100%;
-            padding-top: 56.25%; /* Relación de aspecto 16:9 */
             background-color: #000;
         }
 
-        .video-box iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+        .video-js {
+            width: 100% !important;
+            height: auto !important;
+            aspect-ratio: 16/9;
         }
 
         .controls-bar {
@@ -119,7 +116,6 @@
             background-color: var(--accent-blue);
         }
 
-        /* Información del Canal */
         .info-box {
             margin-top: 20px;
             padding: 20px;
@@ -130,13 +126,13 @@
         .info-box h1 { margin: 0 0 10px 0; font-size: 1.6rem; }
         .info-box p { color: var(--text-muted); line-height: 1.6; margin: 0; }
 
-        /* Chat Lateral Estático */
+        /* Chat Lateral */
         .chat-box {
             background-color: var(--bg-card);
             border-radius: 12px;
             display: flex;
             flex-direction: column;
-            height: 500px;
+            height: 480px;
             border: 1px solid #1e293b;
         }
 
@@ -188,7 +184,6 @@
             cursor: pointer;
         }
 
-        /* Sección de otros canales */
         .more-channels {
             max-width: 1200px;
             margin: 40px auto;
@@ -237,17 +232,18 @@
 </header>
 
 <div class="container">
-    <!-- Bloque izquierdo: Reproductor e Info -->
     <div>
         <div class="player-area">
-            <div class="video-box">
-                <!-- Se utiliza un tráiler deportivo oficial de YouTube como marcador seguro para GitHub Pages -->
-                <iframe id="reproductor" src="https://youtube.com" allowfullscreen></iframe>
+            <div class="video-container">
+                <!-- Reproductor HLS Profesional -->
+                <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" data-setup='{}'>
+                    <source src="https://footprint.net" type="application/x-mpegURL">
+                </video>
             </div>
             <div class="controls-bar">
-                <button class="btn-opcion active" onclick="cambiarOpcion('https://youtube.com', this)">Opción 1</button>
-                <button class="btn-opcion" onclick="cambiarOpcion('https://youtube.com?start=10', this)">Opción 2</button>
-                <button class="btn-opcion" onclick="cambiarOpcion('https://youtube.com?start=20', this)">Opción 3</button>
+                <button class="btn-opcion active" onclick="cambiarSeñal('https://footprint.net', this)">Opción 1</button>
+                <button class="btn-opcion" onclick="cambiarSeñal('https://footprint.net', this)">Opción 2</button>
+                <button class="btn-opcion" onclick="cambiarSeñal('https://503cdn.com', this)">Opción 3</button>
             </div>
         </div>
 
@@ -257,7 +253,6 @@
         </div>
     </div>
 
-    <!-- Bloque derecho: Chat en vivo simulado -->
     <div class="chat-box">
         <div class="chat-header">Chat en Vivo</div>
         <div class="chat-messages" id="chatMessages">
@@ -272,7 +267,6 @@
     </div>
 </div>
 
-<!-- Sección de navegación hacia otros canales oficiales -->
 <div class="more-channels">
     <h3>Ver más canales deportivos</h3>
     <div class="grid-mini">
@@ -287,28 +281,30 @@
     <p>© 2026 TV Hub Gratis 2 | Diseñado de forma estática para GitHub Pages</p>
 </footer>
 
+<!-- Scripts del reproductor Video.js -->
+<script src="https://zencdn.net"></script>
 <script>
-    // Lógica para alternar entre las opciones del reproductor
-    function cambiarOpcion(url, boton) {
-        document.getElementById('reproductor').src = url;
+    var player = videojs('my-video');
+
+    // Cambiar de canal de transmisión de forma dinámica sin romper el reproductor
+    function cambiarSeñal(url, boton) {
+        player.src({
+            src: url,
+            type: 'application/x-mpegURL'
+        });
+        player.play();
         
-        // Actualiza el estado activo en los botones
         document.querySelectorAll('.btn-opcion').forEach(btn => btn.classList.remove('active'));
         boton.classList.add('active');
     }
 
-    // Lógica interactiva para simular el envío de mensajes en el chat
     function enviarMensaje() {
         const input = document.getElementById('chatInput');
         const mensajeTexto = input.value.trim();
         
         if (mensajeTexto !== "") {
             const chatMessages = document.getElementById('chatMessages');
-            
             const nuevoMensaje = document.createElement('div');
             nuevoMensaje.className = 'msg';
             nuevoMensaje.innerHTML = `<span class="user">Tú:</span> ${mensajeTexto}`;
-            
-            chatMessages.appendChild(nuevoMensaje);
-            input.value = "";
             
