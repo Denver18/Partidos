@@ -47,7 +47,6 @@
             font-size: 0.9rem;
         }
 
-        /* Contenedor del Buscador */
         .search-container {
             max-width: 500px;
             margin: 30px auto 10px auto;
@@ -148,7 +147,6 @@
             background-color: var(--accent-hover);
         }
 
-        /* Mensaje de no resultados */
         .no-results {
             text-align: center;
             grid-column: 1 / -1;
@@ -175,7 +173,6 @@
     <p>Guía de canales y agenda deportiva estática</p>
 </header>
 
-<!-- Buscador de Canales -->
 <div class="search-container">
     <input type="text" id="buscarCanal" class="search-input" placeholder="Buscar canal (ej. ESPN, Fox, Liga1)...">
 </div>
@@ -187,7 +184,8 @@
             <div class="logo-placeholder">L1M</div>
             <h3>LIGA1 MAX</h3>
             <p>Fútbol Peruano en vivo</p>
-            <a href="#" class="btn-ver">Ver Canal</a>
+            <!-- REEMPLAZA TU_ENLACE_AQUÍ POR EL LINK REAL -->
+            <a href="TU_ENLACE_AQUÍ" target="_blank" class="btn-ver">Ver Canal</a>
         </div>
 
         <!-- Canal 2 -->
@@ -195,7 +193,7 @@
             <div class="logo-placeholder">DS</div>
             <h3>DSports</h3>
             <p>Sudamericana y Qatar</p>
-            <a href="#" class="btn-ver">Ver Canal</a>
+            <a href="TU_ENLACE_AQUÍ" target="_blank" class="btn-ver">Ver Canal</a>
         </div>
 
         <!-- Canal 3 -->
@@ -203,7 +201,7 @@
             <div class="logo-placeholder">E1</div>
             <h3>ESPN 1</h3>
             <p>Champions League y ligas de Europa</p>
-            <a href="#" class="btn-ver">Ver Canal</a>
+            <a href="TU_ENLACE_AQUÍ" target="_blank" class="btn-ver">Ver Canal</a>
         </div>
 
         <!-- Canal 4 -->
@@ -211,7 +209,7 @@
             <div class="logo-placeholder">E2</div>
             <h3>ESPN 2</h3>
             <p>Torneos locales y ligas internacionales</p>
-            <a href="#" class="btn-ver">Ver Canal</a>
+            <a href="TU_ENLACE_AQUÍ" target="_blank" class="btn-ver">Ver Canal</a>
         </div>
 
         <!-- Canal 5 -->
@@ -219,7 +217,7 @@
             <div class="logo-placeholder">FS1</div>
             <h3>Fox Sports 1</h3>
             <p>Copa Libertadores en directo</p>
-            <a href="#" class="btn-ver">Ver Canal</a>
+            <a href="TU_ENLACE_AQUÍ" target="_blank" class="btn-ver">Ver Canal</a>
         </div>
 
         <!-- Canal 6 -->
@@ -227,10 +225,9 @@
             <div class="logo-placeholder">GPE</div>
             <h3>GOLPERU</h3>
             <p>Partidos históricos y transmisión local</p>
-            <a href="#" class="btn-ver">Ver Canal</a>
+            <a href="TU_ENLACE_AQUÍ" target="_blank" class="btn-ver">Ver Canal</a>
         </div>
 
-        <!-- Mensaje de error si no encuentra nada -->
         <div class="no-results" id="mensajeVacio">
             No se encontraron canales que coincidan con tu búsqueda.
         </div>
@@ -242,7 +239,6 @@
 </footer>
 
 <script>
-    // Lógica del filtro de búsqueda en tiempo real
     document.getElementById('buscarCanal').addEventListener('input', function(e) {
         const terminoBusqueda = e.target.value.toLowerCase().trim();
         const tarjetas = document.querySelectorAll('.card-canal');
@@ -250,11 +246,9 @@
         let contadorVisibles = 0;
 
         tarjetas.forEach(tarjeta => {
-            // Lee el título del canal dentro de la tarjeta
             const nombreCanal = tarjeta.querySelector('h3').textContent.toLowerCase();
             const descripcionCanal = tarjeta.querySelector('p').textContent.toLowerCase();
 
-            // Comprueba si el término de búsqueda coincide con el título o la descripción
             if (nombreCanal.includes(terminoBusqueda) || descripcionCanal.includes(terminoBusqueda)) {
                 tarjeta.style.display = 'flex';
                 contadorVisibles++;
@@ -263,7 +257,6 @@
             }
         });
 
-        // Muestra u oculta el mensaje de error si no hay coincidencias
         if (contadorVisibles === 0) {
             mensajeVacio.style.display = 'block';
         } else {
